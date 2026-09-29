@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+
+  --color-paper: #F5F1E8;
+  --color-paper-card: #FAF8F5;
+  --color-near-black: #171717;
+  --color-burnt-orange: #D94A2B;
+  --color-burnt-orange-hover: #C23E20;
+  --color-burnt-orange-light: #FBF0ED;
+  --color-muted-olive: #697052;
+  --color-muted-olive-light: #F3F4EE;
+  --color-warm-stone: #D8D1C3;
+  --color-stone-dark: #BDB4A5;
+  --color-stone-light: #EBE5DA;
+}
+
+@layer base {
+  body {
+    background-color: #F5F1E8;
+    color: #171717;
+    font-family: 'DM Sans', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Custom ticket styling */
+.ticket-border {
+  border: 1px solid #D8D1C3;
+  box-shadow: 0 2px 8px rgba(23, 23, 23, 0.03);
+}
+
+.ticket-border-dashed {
+  border: 1px dashed #C5BDB0;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F5F1E8;
+}
+::-webkit-scrollbar-thumb {
+  background: #D8D1C3;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #BDB4A5;
+}
