@@ -4,7 +4,8 @@ import {
   INITIAL_SERVICES,
   INITIAL_ACTIVITY,
   INITIAL_NOTIFICATIONS,
-  CURRENT_USER
+  CURRENT_USER,
+  PICKUP_LOCATION
 } from '../data/mockData';
 
 const AppContext = createContext();
@@ -43,20 +44,45 @@ export const AppProvider = ({ children }) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Create a new request (Requester Flow - Max ₹20 Tip)
+  // Send in-app chat message
+  const sendChatMessage = (requestId, text, senderName = currentUser.name) => {
+    if (!text.trim()) return;
+
+    const newMsg = {
+      id: `msg_${Date.now()}`,
+      sender: senderName,
+      text: text.trim(),
+      time: 'Just now'
+    };
+
+    setRequests(prev => prev.map(req => {
+      if (req.id === requestId) {
+        return {
+          ...req,
+          chatMessages: [...(req.chatMessages || []), newMsg]
+        };
+      }
+      return req;
+    }));
+
+    showToast(`Message sent to ${senderName === currentUser.name ? 'bringer' : 'requester'}`, 'success');
+  };
+
+  // Create a new request (Requester Flow - Prepaid/COD option, Max ₹20 Tip)
   const createParcelRequest = (newReqData) => {
     const newId = `req_${Date.now()}`;
-    // Generate simple 4-digit PIN for delivery verification (like Swiggy / Uber PIN)
     const generatedPin = Math.floor(1000 + Math.random() * 9000).toString();
 
     const newRequest = {
       id: newId,
       platform: newReqData.platform || 'Amazon',
       platformColor: newReqData.platformColor || '#D94A2B',
-      pickupLocation: newReqData.pickupLocation,
-      dropLocation: newReqData.dropLocation,
+      pickupLocation: PICKUP_LOCATION, // Always fixed to Delivery Spot
+      dropLocation: newReqData.dropLocation || 'BH1 (Boys Hostel 1)',
       size: newReqData.size || 'Small package',
       urgency: newReqData.urgency || 'As soon as possible',
+      paymentType: newReqData.paymentType || 'Prepaid', // 'Prepaid' or 'COD'
+      codAmount: newReqData.paymentType === 'COD' ? Number(newReqData.codAmount || 0) : 0,
       reward: Math.min(Number(newReqData.reward) || 0, 20), // Max ₹20
       notes: newReqData.notes || '',
       requester: {
@@ -71,7 +97,10 @@ export const AppProvider = ({ children }) => {
       createdAt: new Date().toISOString(),
       status: 'REQUESTED',
       deliveryPin: generatedPin,
-      bringer: null
+      bringer: null,
+      chatMessages: [
+        { id: 'm0', sender: 'System', text: `Request posted (${newReqData.paymentType || 'Prepaid'})! Live chat opens once a bringer accepts.`, time: 'Just now' }
+      ]
     };
 
     setRequests(prev => [newRequest, ...prev]);
@@ -82,7 +111,7 @@ export const AppProvider = ({ children }) => {
       id: `act_${Date.now()}`,
       dayGroup: 'TODAY',
       service: 'PARCEL BRINGER',
-      title: `${newRequest.platform} parcel → ${newRequest.dropLocation}`,
+      title: `${newRequest.platform} parcel (${newRequest.paymentType}) → ${newRequest.dropLocation}`,
       status: 'Request Posted',
       rewardText: newRequest.reward > 0 ? `₹${newRequest.reward} tip` : 'Free bring',
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
@@ -91,12 +120,12 @@ export const AppProvider = ({ children }) => {
     };
     setActivityLogs(prev => [newActivity, ...prev]);
 
-    showToast(`Request posted! Your Delivery PIN is ${generatedPin}`, 'success');
+    showToast(`Request posted! Payment: ${newRequest.paymentType} | PIN: ${generatedPin}`, 'success');
     navigateTo('parcel_bringer', 'tracking');
     return newRequest;
   };
 
-  // Accept a parcel request (Bringer Flow - Ola / Uber Pool style)
+  // Accept a parcel request (Bringer Flow)
   const acceptParcelRequest = (requestId, bringerUser = null) => {
     const assignedBringer = bringerUser || {
       name: 'Yash S.',
@@ -111,7 +140,11 @@ export const AppProvider = ({ children }) => {
         return {
           ...req,
           status: 'ACCEPTED',
-          bringer: assignedBringer
+          bringer: assignedBringer,
+          chatMessages: [
+            ...(req.chatMessages || []),
+            { id: `m_${Date.now()}`, sender: assignedBringer.name, text: `Hey! I accepted your request to bring your ${req.paymentType} parcel from Delivery Spot. Heading there now!`, time: 'Just now' }
+          ]
         };
       }
       return req;
@@ -122,14 +155,14 @@ export const AppProvider = ({ children }) => {
     // Notification
     const newNotif = {
       id: `notif_${Date.now()}`,
-      text: `${assignedBringer.name} accepted your parcel request and is on the way!`,
+      text: `${assignedBringer.name} accepted your parcel request! You can now live chat with him.`,
       timeAgo: 'Just now',
       read: false,
       type: 'ACCEPTED'
     };
     setNotifications(prev => [newNotif, ...prev]);
 
-    showToast(`${assignedBringer.name} accepted the request! Headed to delivery area.`, 'success');
+    showToast(`${assignedBringer.name} accepted request! Live chat opened.`, 'success');
     navigateTo('parcel_bringer', 'tracking');
   };
 
@@ -137,15 +170,23 @@ export const AppProvider = ({ children }) => {
   const markAsPickedUp = (requestId) => {
     setRequests(prev => prev.map(r => {
       if (r.id === requestId) {
-        return { ...r, status: 'PICKED_UP' };
+        const bringerName = r.bringer?.name || 'Bringer';
+        return {
+          ...r,
+          status: 'PICKED_UP',
+          chatMessages: [
+            ...(r.chatMessages || []),
+            { id: `m_${Date.now()}`, sender: bringerName, text: `Parcel secured from Delivery Spot! Heading towards ${r.dropLocation}.`, time: 'Just now' }
+          ]
+        };
       }
       return r;
     }));
 
-    showToast('Parcel collected! Heading to recipient hostel.', 'success');
+    showToast('Parcel collected from Delivery Spot! Heading to recipient hostel.', 'success');
   };
 
-  // Single Delivery PIN Verification (Swiggy/Uber PIN model)
+  // Single Delivery PIN Verification
   const verifyDeliveryPin = (requestId, enteredPin) => {
     const req = requests.find(r => r.id === requestId);
     if (!req) return false;
@@ -153,7 +194,14 @@ export const AppProvider = ({ children }) => {
     if (enteredPin === req.deliveryPin || enteredPin === '4728' || enteredPin === '1234') {
       setRequests(prev => prev.map(r => {
         if (r.id === requestId) {
-          return { ...r, status: 'COMPLETED' };
+          return {
+            ...r,
+            status: 'COMPLETED',
+            chatMessages: [
+              ...(r.chatMessages || []),
+              { id: `m_${Date.now()}`, sender: 'System', text: `Delivery PIN verified! Parcel handed over at ${r.dropLocation}. ₹${r.reward} tip settled.`, time: 'Just now' }
+            ]
+          };
         }
         return r;
       }));
@@ -169,7 +217,7 @@ export const AppProvider = ({ children }) => {
         id: `act_${Date.now()}`,
         dayGroup: 'TODAY',
         service: 'PARCEL BRINGER',
-        title: `${req.platform} parcel → ${req.dropLocation}`,
+        title: `${req.platform} parcel (${req.paymentType}) → ${req.dropLocation}`,
         status: `Delivered by ${req.bringer?.name || 'Bringer'}`,
         rewardText: req.reward > 0 ? `₹${req.reward} tip` : 'Free bring',
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
@@ -219,6 +267,7 @@ export const AppProvider = ({ children }) => {
       acceptParcelRequest,
       markAsPickedUp,
       verifyDeliveryPin,
+      sendChatMessage,
       updateRequestStatus,
       setSelectedRequestForDetail,
       setActiveRequestId,

@@ -3,12 +3,6 @@ import { X, CheckCircle2, Star, MessageSquare, ArrowRight, ShieldCheck, MapPin, 
 import { motion, AnimatePresence } from 'framer-motion';
 
 export const RequestDetailModal = ({ request, onClose, onAccept }) => {
-  const [showQuestionBox, setShowQuestionBox] = useState(false);
-  const [questionText, setQuestionText] = useState('');
-  const [messages, setMessages] = useState([
-    { sender: 'Ananya R.', text: 'Hi! Package is right near delivery desk #2.', time: '2m ago' }
-  ]);
-
   if (!request) return null;
 
   const {
@@ -24,18 +18,6 @@ export const RequestDetailModal = ({ request, onClose, onAccept }) => {
     timeAgo,
     notes
   } = request;
-
-  const handleSendQuestion = (e) => {
-    e.preventDefault();
-    if (!questionText.trim()) return;
-    
-    setMessages(prev => [
-      ...prev,
-      { sender: 'You', text: questionText, time: 'Just now' },
-      { sender: requester.name, text: 'Sounds good! I will be at the hostel entrance.', time: '1m ago' }
-    ]);
-    setQuestionText('');
-  };
 
   return (
     <AnimatePresence>
@@ -87,14 +69,14 @@ export const RequestDetailModal = ({ request, onClose, onAccept }) => {
               <div className="flex-1 space-y-6">
                 <div>
                   <span className="text-[10px] font-bold text-[#697052] uppercase tracking-wider">PICKUP LOCATION</span>
-                  <h4 className="font-bold text-base text-[#171717]">{pickupLocation}</h4>
-                  <span className="text-xs text-[#171717]/60">Academic Block delivery zone</span>
+                  <h4 className="font-bold text-base text-[#171717]">Delivery Spot</h4>
+                  <span className="text-xs text-[#171717]/60">Official Campus Parcel Area</span>
                 </div>
 
                 <div>
-                  <span className="text-[10px] font-bold text-[#697052] uppercase tracking-wider">DROP LOCATION</span>
+                  <span className="text-[10px] font-bold text-[#697052] uppercase tracking-wider">DESTINATION HOSTEL BLOCK</span>
                   <h4 className="font-bold text-base text-[#171717]">{dropLocation}</h4>
-                  <span className="text-xs text-[#171717]/60">Hostel reception / room entrance</span>
+                  <span className="text-xs text-[#171717]/60">Hostel main entrance / lobby</span>
                 </div>
               </div>
             </div>
@@ -113,9 +95,9 @@ export const RequestDetailModal = ({ request, onClose, onAccept }) => {
             </div>
 
             <div className="p-3 bg-[#FBF0ED] border border-[#D94A2B]/30 rounded-xl">
-              <span className="text-[10px] text-[#D94A2B] font-semibold uppercase block">Negotiated Reward</span>
+              <span className="text-[10px] text-[#D94A2B] font-semibold uppercase block">Negotiated Tip</span>
               <span className="font-extrabold text-sm text-[#D94A2B]">
-                {reward > 0 ? `₹${reward}` : 'Free bring'}
+                {reward > 0 ? `₹${reward} tip` : 'Free bring'}
               </span>
             </div>
 
@@ -159,53 +141,14 @@ export const RequestDetailModal = ({ request, onClose, onAccept }) => {
             </span>
           </div>
 
-          {/* Ask a question accordion */}
-          {showQuestionBox && (
-            <div className="mt-4 p-4 bg-[#F5F1E8] border border-[#D8D1C3] rounded-2xl space-y-3">
-              <h5 className="font-serif text-base font-bold text-[#171717]">Quick Q&A with Requester</h5>
-              <div className="space-y-2 max-h-40 overflow-y-auto pr-1">
-                {messages.map((m, idx) => (
-                  <div key={idx} className={`p-2 rounded-xl text-xs ${m.sender === 'You' ? 'bg-[#D94A2B]/10 text-[#D94A2B] font-semibold text-right ml-6' : 'bg-[#FAF8F5] text-[#171717] mr-6 border border-[#D8D1C3]'}`}>
-                    <span className="text-[9px] block text-[#697052]">{m.sender} · {m.time}</span>
-                    <span>{m.text}</span>
-                  </div>
-                ))}
-              </div>
-
-              <form onSubmit={handleSendQuestion} className="flex gap-2">
-                <input
-                  type="text"
-                  placeholder="Ask e.g. Where near security desk?"
-                  value={questionText}
-                  onChange={(e) => setQuestionText(e.target.value)}
-                  className="flex-1 p-2.5 rounded-xl bg-white border border-[#D8D1C3] text-xs text-[#171717] focus:outline-none"
-                />
-                <button
-                  type="submit"
-                  className="p-2.5 bg-[#D94A2B] text-white rounded-xl hover:bg-[#C23E20]"
-                >
-                  <Send className="w-4 h-4" />
-                </button>
-              </form>
-            </div>
-          )}
-
           {/* Modal Actions */}
           <div className="mt-6 space-y-2">
             <button
               onClick={() => onAccept(id)}
               className="w-full py-4 bg-[#D94A2B] hover:bg-[#C23E20] text-white font-bold text-sm rounded-2xl shadow-md transition-transform active:scale-98 flex items-center justify-center gap-2"
             >
-              <span>Accept Request & Bring Parcel</span>
+              <span>Accept Request & Open Live Chat</span>
               <ArrowRight className="w-4 h-4" />
-            </button>
-
-            <button
-              onClick={() => setShowQuestionBox(!showQuestionBox)}
-              className="w-full py-3 bg-[#FAF8F5] hover:bg-[#F5F1E8] border border-[#D8D1C3] text-[#171717] font-semibold text-xs rounded-2xl transition-colors flex items-center justify-center gap-2"
-            >
-              <MessageSquare className="w-4 h-4 text-[#697052]" />
-              <span>{showQuestionBox ? 'Hide Questions' : 'Ask a Question'}</span>
             </button>
           </div>
 
