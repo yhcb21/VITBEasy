@@ -1,0 +1,8 @@
+/* Clean base stylesheet */
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background-color: #ffffff;
+  color: #111111;
+  padding: 24px;
+}

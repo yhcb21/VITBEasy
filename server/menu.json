@@ -1,0 +1,318 @@
+{
+  "institution": "VIT Bhopal",
+  "menu_title": "Boys & Girls Hostels Mess Menu",
+  "month": "September 2026",
+  "effective_from": "2026-09-14",
+  "menu_week": {
+    "start": "2026-09-21",
+    "end": "2026-09-27"
+  },
+  "categories": [
+    "veg",
+    "non-veg"
+  ],
+  "timings": {
+    "breakfast": {
+      "start": "07:30",
+      "end": "09:30",
+      "counter_closing": "09:30"
+    },
+    "lunch": {
+      "start": "12:15",
+      "end": "14:30",
+      "counter_closing": "14:10"
+    },
+    "evening_snacks": {
+      "start": "17:00",
+      "end": "18:30",
+      "counter_closing": "18:30"
+    },
+    "dinner": {
+      "start": "19:15",
+      "end": "21:15",
+      "counter_closing": "21:15"
+    }
+  },
+  "days": [
+    {
+      "day": "Monday",
+      "meals": {
+        "breakfast": [
+          "Vegetable Idli & Ulundu Vada",
+          "Sambar",
+          "Tomato Onion Mint Chutney",
+          "Mix Fruits",
+          "Steamed Sprouts Salad",
+          "Bread, Butter, Jam",
+          "Tea, Coffee, Milk"
+        ],
+        "lunch": [
+          "Roti (Plain & Butter)",
+          "Plain Rice - North & South",
+          "Palak Dal",
+          "Aloo Burji",
+          "Bisi Bele Bath & Boondi",
+          "Beans, Carrot/Peas Poriyal",
+          "Pepper Rasam",
+          "Curd",
+          "Fruit Kesari",
+          "Pickle"
+        ],
+        "evening_snacks": [
+          "Sprouts Chat",
+          "Tea, Milk, Coffee"
+        ],
+        "dinner": [
+          "Roti (Plain & Butter)",
+          "Plain Rice - North & South",
+          "Toor Dal",
+          "Veg Kolapuri (Veg) / Egg Kolhapuri (Non-Veg)",
+          "Mix Vegetable Salad",
+          "Rasam",
+          "Curd Rice",
+          "Pickle"
+        ]
+      }
+    },
+    {
+      "day": "Tuesday",
+      "meals": {
+        "breakfast": [
+          "Poha, Sev, Jeeraman",
+          "Jalebi",
+          "Sooji Upma & Coconut Chutney",
+          "Banana",
+          "Cucumber Salad",
+          "Bread, Butter, Jam",
+          "Tea, Coffee, Milk"
+        ],
+        "lunch": [
+          "Roti (Plain & Butter)",
+          "Plain Rice - North & South",
+          "Kashmiri Rajma",
+          "Matki Usal",
+          "Drumstick Theeyal (Kerala Style Karakulambu)",
+          "Cabbage Peas Poriyal",
+          "Lemon Rasam",
+          "Butter Milk",
+          "NA",
+          "Pickle"
+        ],
+        "evening_snacks": [
+          "Vegetable Cutlet",
+          "Tea, Coffee, Milk"
+        ],
+        "dinner": [
+          "Roti (Plain & Butter)",
+          "Jeera Rice & Plain Rice",
+          "Dal Fry",
+          "Aloo Banana Bhindi Dry",
+          "Cucumber Salad",
+          "Rasam",
+          "Curd Rice",
+          "Pickle"
+        ]
+      }
+    },
+    {
+      "day": "Wednesday",
+      "meals": {
+        "breakfast": [
+          "Misal Pav",
+          "Vermicelli Kichdi",
+          "Peanut Chutney",
+          "Mix Fruits",
+          "Boiled Egg (Non-Veg) / Steamed Green Gram Sprouts (Veg)",
+          "Bread, Butter, Jam",
+          "Tea, Coffee, Milk"
+        ],
+        "lunch": [
+          "Roti (Plain & Butter)",
+          "Plain Rice - North & South",
+          "Veg Dhalma",
+          "Aloo Kosa",
+          "Sorakai (Lowki) Sambar",
+          "Beetroot Poriyal",
+          "Pineapple Rasam",
+          "Curd",
+          "Kheer",
+          "Pickle"
+        ],
+        "evening_snacks": [
+          "Dahi Vada",
+          "Tea, Coffee, Milk"
+        ],
+        "dinner": [
+          "Roti (Plain & Butter)",
+          "Plain Rice - North & South",
+          "Dal Tadka",
+          "Paneer Lababdar (Veg) / Pepper Chicken (Non-Veg)",
+          "Mix Vegetable Salad",
+          "Rasam",
+          "Curd Rice",
+          "Pickle"
+        ]
+      }
+    },
+    {
+      "day": "Thursday",
+      "meals": {
+        "breakfast": [
+          "Ghee Pongal",
+          "Sambar",
+          "Coconut Chutney",
+          "Banana",
+          "Mixed Vegetable Salad",
+          "Bread, Butter, Jam",
+          "Tea, Coffee, Milk"
+        ],
+        "lunch": [
+          "Roti (Plain & Butter)",
+          "Plain Rice - North & South",
+          "Panchmel Dal",
+          "Aloo Long Beans Suki Sabji (Rajasthani)",
+          "Brinjal Karakuzambu",
+          "Bottle Gourd Kootu (As Side Dish Consistency)",
+          "Tomato Rasam",
+          "Butter Milk",
+          "NA",
+          "Pickle"
+        ],
+        "evening_snacks": [
+          "Bhel Poori",
+          "Tea, Coffee, Milk"
+        ],
+        "dinner": [
+          "Roti (Plain & Butter)",
+          "Plain Rice - North & South",
+          "Bhaja Muger Dal",
+          "Chorchori (Mix Veg) / Jhol Masala (Non-Veg)",
+          "Bengali Salad",
+          "Rasam",
+          "Curd Rice",
+          "Pickle"
+        ]
+      }
+    },
+    {
+      "day": "Friday",
+      "meals": {
+        "breakfast": [
+          "Podi Uttapam",
+          "Sambar",
+          "Kara Chutney",
+          "Single Fruit",
+          "Mixed Vegetable Salad",
+          "Bread, Butter, Jam",
+          "Tea, Coffee, Milk"
+        ],
+        "lunch": [
+          "Roti (Plain & Butter)",
+          "Plain Rice - North & South",
+          "Dum Aloo Gravy",
+          "Pappu (Andhra Dal)",
+          "NA",
+          "Mix Vegetable Veppudu (Andhra Vegetable Fry)",
+          "Chettinadu Rasam",
+          "Curd",
+          "Gulab Jamun",
+          "Pickle"
+        ],
+        "evening_snacks": [
+          "Mirchi Bhajji / Mix Bhaji with Coconut Chutney / Red Chutney",
+          "Tea, Coffee, Milk"
+        ],
+        "dinner": [
+          "Roti (Plain & Butter)",
+          "Plain Rice - North & South",
+          "Dal Tadka",
+          "Mutter Paneer Masala (Veg) / Chicken Makhani (Non-Veg)",
+          "Mix Vegetable Salad",
+          "Rasam",
+          "Curd Rice",
+          "Pickle"
+        ]
+      }
+    },
+    {
+      "day": "Saturday",
+      "meals": {
+        "breakfast": [
+          "Katura",
+          "Omani Masala",
+          "Lemon & Chilli",
+          "Mix Fruits",
+          "Boiled Egg (Non-Veg) / Steamed Green Gram Sprouts (Veg)",
+          "Bread, Butter, Jam",
+          "Tea, Coffee, Milk"
+        ],
+        "lunch": [
+          "Roti (Plain & Butter)",
+          "Pudina Rice",
+          "Soyachunk Chukka Masala",
+          "Amti Dal",
+          "Garlic Potato Roast",
+          "NA",
+          "Garlic Rasam",
+          "Butter Milk",
+          "NA",
+          "Pickle"
+        ],
+        "evening_snacks": [
+          "Corn Club Sandwich, Green Chutney",
+          "Tea, Coffee, Milk"
+        ],
+        "dinner": [
+          "Roti (Plain & Butter)",
+          "Ghee Rice & Plain Rice",
+          "Mix Dal",
+          "Aloo Shimla Mirch",
+          "Bengali Salad",
+          "Rasam",
+          "Curd Rice",
+          "Pickle"
+        ]
+      }
+    },
+    {
+      "day": "Sunday",
+      "meals": {
+        "breakfast": [
+          "Masala Dosa",
+          "Sambar",
+          "Coconut Chutney",
+          "Banana",
+          "Steamed Sprouts Salad",
+          "Bread, Butter, Jam",
+          "Tea, Coffee, Milk"
+        ],
+        "lunch": [
+          "Roti (Plain & Butter)",
+          "Chicken Lucknowi Biryani (Non-Veg) / [Veg option as listed on notice]",
+          "Paneer Pasanda",
+          "Masala Dal",
+          "Onion/Cucumber Raita",
+          "NA",
+          "NA",
+          "NA",
+          "Double Ka Meetha",
+          "Pickle"
+        ],
+        "evening_snacks": [
+          "Chinese Veg Noodles",
+          "Tea, Coffee, Milk"
+        ],
+        "dinner": [
+          "Roti (Plain & Butter)",
+          "Veg Fried Rice & Plain Rice",
+          "Veg Manchurian Semi-Gravy",
+          "Dal Fry",
+          "Mix Vegetable Salad",
+          "Rasam",
+          "Curd Rice",
+          "Pickle"
+        ]
+      }
+    }
+  ]
+}
