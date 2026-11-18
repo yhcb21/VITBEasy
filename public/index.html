@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VITBeasy — Lost & Found</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><span>V</span> VITBeasy</div>
+      <nav>
+        <a href="#" class="active">⌂ <span>Home</span></a>
+        <a href="#">▣ <span>Academics</span></a>
+        <a href="#">◫ <span>Events</span></a>
+        <a href="#" class="active">⌕ <span>Lost & Found</span></a>
+        <a href="#">⌂ <span>Hostel</span></a>
+        <a href="#">☕ <span>Food & Cafeteria</span></a>
+        <a href="#">⇄ <span>Transport</span></a>
+        <a href="#">♧ <span>Community</span></a>
+        <a href="#">⚙ <span>Services</span></a>
+      </nav>
+      <div class="sidebar-bottom">◉ Help & Support</div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div class="mobile-brand">VITBeasy</div>
+        <div class="top-search">⌕ <input id="search" placeholder="Search items, places, events..." /></div>
+        <div class="profile">● <strong>Yash Dubey</strong><small>Student</small>⌄</div>
+      </header>
+
+      <section class="hero">
+        <div>
+          <p class="eyebrow">VITBeasy • Campus Community</p>
+          <h1>Lost something?<br><span>Found something?</span></h1>
+          <p class="hero-text">Help your campus community reconnect with the things that matter.</p>
+          <div class="hero-actions">
+            <button class="primary" onclick="openModal('lost')">＋ Report Lost Item</button>
+            <button type="button" class="secondary" onclick="openModal('found')">
+              + Report Found Item
+            </button>
+          </div>
+        </div>
+        <div class="hero-glow"></div>
+      </section>
+
+      <section class="quick">
+        <div class="search-large">⌕ <input id="heroSearch" placeholder="Search wallets, ID cards, laptops, locations..." /><button onclick="loadItems()">Search</button></div>
+        <div class="categories">
+          <button class="cat active" data-category="All">✦<span>All</span></button>
+          <button class="cat" data-category="Electronics">▣<span>Electronics</span></button>
+          <button class="cat" data-category="Documents">▤<span>Documents</span></button>
+          <button class="cat" data-category="Accessories">◆<span>Accessories</span></button>
+          <button class="cat" data-category="Bags">▣<span>Bags</span></button>
+          <button class="cat" data-category="Clothing">◇<span>Clothing</span></button>
+          <button class="cat" data-category="Other">•••<span>Other</span></button>
+        </div>
+      </section>
+
+      <section class="content">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Campus community</p>
+            <h2>Recent Items</h2>
+          </div>
+          <div class="filters">
+            <button class="filter active" data-type="">All</button>
+            <button class="filter" data-type="lost">Lost</button>
+            <button class="filter" data-type="found">Found</button>
+          </div>
+        </div>
+        <div id="items" class="grid"></div>
+      </section>
+    </main>
+  </div>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-card">
+      <button class="close" onclick="closeModal()">×</button>
+      <p class="eyebrow">VITBeasy</p>
+      <h2 id="modalTitle">Report Lost Item</h2>
+      <form id="itemForm">
+        <input type="hidden" id="type" />
+        <label>Item name<input id="title" required placeholder="e.g. Black wallet" /></label>
+        <label>Category
+          <select id="category" required>
+            <option value="">Select category</option>
+            <option>Electronics</option><option>Documents</option><option>Accessories</option>
+            <option>Bags</option><option>Clothing</option><option>Other</option>
+          </select>
+        </label>
+        <label>Location<input id="location" required placeholder="Library Block A, Gym..." /></label>
+        <label>Date<input id="date" type="date" required /></label>
+        <label>Description<textarea id="description" required placeholder="Colour, brand, identifying details..."></textarea></label>
+        <label>Upload Item Image <small>(optional)</small>
+          <input
+            id="image"
+            type="file"
+            accept="image/*"
+          />
+        </label>
+        <label>Your name
+          <input id="postedBy" required placeholder="Enter your name" />
+        </label>
+        
+        <label>Contact information
+          <input id="contact" required placeholder="Phone number or email" />
+        </label>
+        <button class="primary full" type="submit">Publish Item →</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="detailsModal" class="modal hidden">
+    <div class="modal-card">
+      <button class="close" onclick="closeDetails()">×</button>
+      <div id="itemDetails"></div>
+    </div>
+  </div>
+
+  <div id="toast"></div>
+  <script src="/js/app.js"></script>
+</body>
+</html>

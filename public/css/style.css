@@ -1,0 +1,49 @@
+*{box-sizing:border-box}body{margin:0;background:#050a13;color:#eaf1ff;font-family:Inter,Segoe UI,Arial,sans-serif}.app{display:flex;min-height:100vh}.sidebar{width:230px;background:#070d18;border-right:1px solid #17243a;padding:24px 14px;position:fixed;height:100vh}.brand{font-size:20px;font-weight:800;margin:0 10px 38px}.brand span{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:8px;background:#1d65ff;box-shadow:0 0 22px #1260ff66;margin-right:6px}nav{display:grid;gap:7px}nav a{color:#8291a8;text-decoration:none;padding:12px 13px;border-radius:10px;font-size:14px;display:flex;gap:12px;align-items:center}nav a:hover,nav a.active{color:#fff;background:linear-gradient(90deg,#1260ff22,#1260ff08);border:1px solid #1260ff2b}.sidebar-bottom{position:absolute;bottom:25px;color:#718097;font-size:13px;padding:10px}.topbar{height:72px;border-bottom:1px solid #17243a;display:flex;align-items:center;justify-content:space-between;padding:0 34px;position:sticky;top:0;background:#050a13e8;backdrop-filter:blur(16px);z-index:5}.top-search{background:#0d1726;border:1px solid #1d2c44;border-radius:12px;width:430px;padding:9px 14px;color:#6880a0}.top-search input,.search-large input{background:none;border:0;outline:0;color:#fff;width:90%;font-size:14px}.profile{font-size:13px;display:flex;gap:8px;align-items:center}.profile small{color:#6d7e96;margin-left:-4px}.mobile-brand{display:none}main{margin-left:230px;width:calc(100% - 230px)}.hero{margin:28px 34px 0;min-height:310px;border:1px solid #1d3558;border-radius:24px;overflow:hidden;position:relative;padding:48px;background:radial-gradient(circle at 80% 10%,#1260ff44,transparent 35%),linear-gradient(120deg,#071224,#0a1930 60%,#06101e)}.hero:after{content:"";position:absolute;right:-100px;bottom:-170px;width:520px;height:520px;border-radius:50%;background:#0762ff18;filter:blur(20px)}.eyebrow{color:#3d8aff;text-transform:uppercase;letter-spacing:1.5px;font-size:11px;font-weight:800}.hero h1{font-size:45px;line-height:1.05;margin:12px 0}.hero h1 span{color:#3985ff}.hero-text{color:#94a6c0;max-width:500px}.hero-actions{display:flex;gap:12px;margin-top:26px}.primary,.secondary,.filter,.cat{cursor:pointer}.primary{background:linear-gradient(135deg,#1767ff,#318cff);color:#fff;border:0;border-radius:10px;padding:13px 18px;font-weight:700;box-shadow:0 8px 30px #1767ff33}.secondary{background:#0c1728;color:#dce8ff;border:1px solid #2a446b;border-radius:10px;padding:13px 18px;font-weight:700}.quick{margin:0 34px;position:relative;transform:translateY(-1px)}.search-large{margin-top:-25px;background:#0c1626;border:1px solid #2b4a77;border-radius:14px;padding:14px 18px;display:flex;align-items:center;box-shadow:0 15px 50px #0008}.search-large button{background:#1767ff;border:0;color:#fff;padding:10px 18px;border-radius:9px}.categories{display:flex;gap:12px;margin-top:18px;overflow:auto}.cat{min-width:105px;background:#0b1524;border:1px solid #1b2b43;color:#a9bad1;border-radius:14px;padding:14px}.cat:first-letter{color:#3d8aff}.cat span{display:block;margin-top:7px;font-size:12px}.cat.active{border-color:#1b70ff;background:#0b2043;color:#fff}.content{padding:34px}.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:20px}.section-head h2{font-size:25px;margin:4px 0}.filters{display:flex;gap:7px}.filter{background:#0b1422;color:#8092aa;border:1px solid #1b2b43;border-radius:9px;padding:9px 14px}.filter.active{background:#1164f3;color:#fff;border-color:#1164f3}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.card{background:#0a1320;border:1px solid #192b43;border-radius:15px;overflow:hidden;transition:.2s}.card:hover{transform:translateY(-4px);border-color:#2b70d8;box-shadow:0 12px 35px #0006}.thumb{height:165px;background:#111d2d;display:grid;place-items:center;overflow:hidden}.thumb img{width:100%;height:100%;object-fit:cover}.placeholder{font-size:42px;color:#3d8aff}.card-body{padding:15px}.badge{font-size:10px;font-weight:800;padding:4px 7px;border-radius:5px;text-transform:uppercase}.lost{background:#ff354e;color:#fff}.found{background:#18bd6b;color:#fff}.card h3{margin:10px 0 5px;font-size:16px}.muted{color:#70829b;font-size:12px}.meta{display:flex;justify-content:space-between;margin-top:12px;color:#8598b0;font-size:11px}.modal{position:fixed;inset:0;background:#000a;display:grid;place-items:center;z-index:20;padding:20px}.hidden{display:none}.modal-card{width:min(520px,100%);background:#091321;border:1px solid #264266;border-radius:20px;padding:28px;position:relative;box-shadow:0 30px 100px #000}.close{position:absolute;right:20px;top:15px;background:none;border:0;color:#9eb0c9;font-size:28px;cursor:pointer}.modal-card h2{margin:5px 0 22px}.modal-card form{display:grid;gap:14px}.modal-card label{font-size:12px;color:#8fa2bb;display:grid;gap:6px}.modal-card input,.modal-card select,.modal-card textarea{background:#0c1726;border:1px solid #243b5a;color:#fff;border-radius:9px;padding:12px;outline:0}.modal-card textarea{min-height:85px;resize:vertical}.full{width:100%}#toast{position:fixed;bottom:25px;right:25px;background:#0e1d31;border:1px solid #2764a8;padding:13px 18px;border-radius:10px;display:none;z-index:30}@media(max-width:1000px){.sidebar{width:70px}.sidebar .brand{font-size:0}.sidebar .brand span{font-size:15px}.sidebar nav a span,.sidebar-bottom{display:none}main{margin-left:70px;width:calc(100% - 70px)}.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:650px){.sidebar{display:none}main{margin:0;width:100%}.topbar{padding:0 16px}.top-search{width:48%}.profile strong,.profile small{display:none}.mobile-brand{display:block;font-weight:800}.hero{margin:15px 15px 0;padding:28px;min-height:350px}.hero h1{font-size:36px}.quick{margin:0 15px}.content{padding:25px 15px}.grid{grid-template-columns:1fr}.categories{gap:8px}.cat{min-width:85px}.section-head{align-items:start;gap:15px;flex-direction:column}.search-large{margin-top:-25px}.hero-actions{flex-direction:column}.primary,.secondary{width:100%}}
+
+/* Internal scrolling for Lost and Found cards */
+.report-card {
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Optional: scrollbar styling */
+.report-card::-webkit-scrollbar {
+    width: 6px;
+}
+
+.report-card::-webkit-scrollbar-thumb {
+    background: #526783;
+    border-radius: 10px;
+}
+
+.report-card::-webkit-scrollbar-track {
+    background: #17263b;
+}
+
+/* Make Lost/Found report form internally scrollable */
+#modal .modal-card {
+    max-height: 85vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Keep the scrollbar visible and styled */
+#modal .modal-card::-webkit-scrollbar {
+    width: 6px;
+}
+
+#modal .modal-card::-webkit-scrollbar-thumb {
+    background: #526783;
+    border-radius: 10px;
+}
+
+#modal .modal-card::-webkit-scrollbar-track {
+    background: #17263b;
+}
+
+/* Firefox */
+#modal .modal-card {
+    scrollbar-width: thin;
+    scrollbar-color: #526783 #17263b;
+}
