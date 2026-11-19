@@ -1,17 +1,52 @@
-import React from 'react';
+import React, { useState } from 'react';
 import menuData from './menu.json';
-
-const MEAL_TYPES = [
-  { key: 'breakfast', label: 'Breakfast' },
-  { key: 'lunch', label: 'Lunch' },
-  { key: 'evening_snacks', label: 'Evening Snacks' },
-  { key: 'dinner', label: 'Dinner' }
-];
+import MessMenuTable from './components/MessMenuTable';
+import ReviewDrawer from './components/ReviewDrawer';
 
 function App() {
-  const handleCellClick = (dayName, mealTypeKey, items) => {
-    // For now, simple alert to verify the click works and identifies the right slot!
-    alert(`Clicked on: ${dayName} - ${mealTypeKey}\n\nItems:\n${items.join('\n')}`);
+  // Currently clicked slot (e.g. { day: 'Monday', mealType: 'Lunch', items: [...] })
+  const [selectedSlot, setSelectedSlot] = useState(null);
+
+  // Store reviews globally by DISH NAME so dishes served multiple times share reviews!
+  // Structure: { [dishName]: [ { userName, rating, comment, date, mealContext }, ... ] }
+  const [reviewsByDish, setReviewsByDish] = useState({
+    'Roti (Plain & Butter)': [
+      {
+        userName: 'Aman',
+        rating: 4,
+        comment: 'Fresh and soft today.',
+        date: '2026-11-18',
+        mealContext: 'Monday Lunch'
+      }
+    ],
+    'Sambar': [
+      {
+        userName: 'Sneha',
+        rating: 5,
+        comment: 'Authentic taste and good vegetables.',
+        date: '2026-11-19',
+        mealContext: 'Monday Breakfast'
+      }
+    ]
+  });
+
+  const handleMealClick = (slotInfo) => {
+    setSelectedSlot(slotInfo);
+  };
+
+  const handleCloseDrawer = () => {
+    setSelectedSlot(null);
+  };
+
+  // Called when a review is submitted in ReviewDrawer
+  const handleAddDishReview = ({ dishName, review }) => {
+    setReviewsByDish((prev) => {
+      const existingReviews = prev[dishName] || [];
+      return {
+        ...prev,
+        [dishName]: [review, ...existingReviews]
+      };
+    });
   };
 
   return (
@@ -23,57 +58,21 @@ function App() {
         </p>
       </header>
 
-      <div style={styles.tableWrapper}>
-        <table style={styles.table}>
-          <thead>
-            <tr>
-              <th style={styles.cornerHeader}>Day</th>
-              {MEAL_TYPES.map((meal) => (
-                <th key={meal.key} style={styles.headerCell}>
-                  {meal.label}
-                  {menuData.timings && menuData.timings[meal.key] && (
-                    <div style={styles.timing}>
-                      {menuData.timings[meal.key].start} - {menuData.timings[meal.key].end}
-                    </div>
-                  )}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {menuData.days.map((dayObj) => (
-              <tr key={dayObj.day}>
-                <td style={styles.dayCell}>
-                  <div style={styles.dayName}>{dayObj.day}</div>
-                  <div style={styles.dateText}>{dayObj.date}</div>
-                </td>
+      {/* The full-width mess menu table */}
+      <MessMenuTable 
+        menuData={menuData} 
+        onMealClick={handleMealClick} 
+      />
 
-                {MEAL_TYPES.map((meal) => {
-                  const items = dayObj.meals[meal.key] || [];
-                  // Filter out "NA" placeholders
-                  const validItems = items.filter(item => item !== 'NA');
-
-                  return (
-                    <td
-                      key={meal.key}
-                      style={styles.cell}
-                      onClick={() => handleCellClick(dayObj.day, meal.label, validItems)}
-                      title="Click to view/add reviews"
-                    >
-                      <ul style={styles.itemList}>
-                        {validItems.map((item, idx) => (
-                          <li key={idx} style={styles.itemText}>{item}</li>
-                        ))}
-                      </ul>
-                      <div style={styles.hintText}>Click for reviews</div>
-                    </td>
-                  );
-                })}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      {/* Right-side floating Drawer */}
+      {selectedSlot && (
+        <ReviewDrawer
+          slot={selectedSlot}
+          reviewsByDish={reviewsByDish}
+          onClose={handleCloseDrawer}
+          onSubmitReview={handleAddDishReview}
+        />
+      )}
     </div>
   );
 }
@@ -98,74 +97,6 @@ const styles = {
     margin: 0,
     fontSize: '14px',
     color: '#555555'
-  },
-  tableWrapper: {
-    overflowX: 'auto',
-    border: '1px solid #cccccc',
-    backgroundColor: '#ffffff'
-  },
-  table: {
-    width: '100%',
-    borderCollapse: 'collapse',
-    textAlign: 'left'
-  },
-  cornerHeader: {
-    padding: '12px',
-    border: '1px solid #cccccc',
-    backgroundColor: '#f5f5f5',
-    fontWeight: 'bold',
-    width: '130px',
-    fontSize: '14px'
-  },
-  headerCell: {
-    padding: '12px',
-    border: '1px solid #cccccc',
-    backgroundColor: '#f5f5f5',
-    fontWeight: 'bold',
-    fontSize: '14px'
-  },
-  timing: {
-    fontSize: '11px',
-    fontWeight: 'normal',
-    color: '#666666',
-    marginTop: '2px'
-  },
-  dayCell: {
-    padding: '12px',
-    border: '1px solid #cccccc',
-    backgroundColor: '#fafafa',
-    verticalAlign: 'top'
-  },
-  dayName: {
-    fontWeight: 'bold',
-    fontSize: '14px'
-  },
-  dateText: {
-    fontSize: '12px',
-    color: '#666666',
-    marginTop: '2px'
-  },
-  cell: {
-    padding: '10px 12px',
-    border: '1px solid #cccccc',
-    verticalAlign: 'top',
-    cursor: 'pointer',
-    backgroundColor: '#ffffff',
-    minWidth: '180px'
-  },
-  itemList: {
-    margin: '0 0 8px 0',
-    paddingLeft: '16px',
-    fontSize: '12px',
-    lineHeight: '1.4'
-  },
-  itemText: {
-    marginBottom: '3px'
-  },
-  hintText: {
-    fontSize: '11px',
-    color: '#0066cc',
-    textDecoration: 'underline'
   }
 };
 
