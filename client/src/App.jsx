@@ -1,34 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import menuData from './menu.json';
 import MessMenuTable from './components/MessMenuTable';
 import ReviewDrawer from './components/ReviewDrawer';
 
+// Storage key constant
+const LOCAL_STORAGE_KEY = 'mess_menu_reviews_by_dish';
+
+// Initial default seed reviews (used only if localStorage is completely empty)
+const DEFAULT_REVIEWS = {
+  'Roti (Plain & Butter)': [
+    {
+      userName: 'Aman',
+      rating: 4,
+      comment: 'Fresh and soft today.',
+      date: '2026-11-18',
+      mealContext: 'Monday Lunch'
+    }
+  ],
+  'Sambar': [
+    {
+      userName: 'Sneha',
+      rating: 5,
+      comment: 'Authentic taste and good vegetables.',
+      date: '2026-11-19',
+      mealContext: 'Monday Breakfast'
+    }
+  ]
+};
+
 function App() {
-  // Currently clicked slot (e.g. { day: 'Monday', mealType: 'Lunch', items: [...] })
   const [selectedSlot, setSelectedSlot] = useState(null);
 
-  // Store reviews globally by DISH NAME so dishes served multiple times share reviews!
-  // Structure: { [dishName]: [ { userName, rating, comment, date, mealContext }, ... ] }
-  const [reviewsByDish, setReviewsByDish] = useState({
-    'Roti (Plain & Butter)': [
-      {
-        userName: 'Aman',
-        rating: 4,
-        comment: 'Fresh and soft today.',
-        date: '2026-11-18',
-        mealContext: 'Monday Lunch'
+  // 1. Lazy initialization: Load from localStorage on first render
+  const [reviewsByDish, setReviewsByDish] = useState(() => {
+    try {
+      const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
+      if (saved) {
+        return JSON.parse(saved);
       }
-    ],
-    'Sambar': [
-      {
-        userName: 'Sneha',
-        rating: 5,
-        comment: 'Authentic taste and good vegetables.',
-        date: '2026-11-19',
-        mealContext: 'Monday Breakfast'
-      }
-    ]
+    } catch (err) {
+      console.error('Failed to load reviews from localStorage:', err);
+    }
+    return DEFAULT_REVIEWS;
   });
+
+  // 2. Persist to localStorage whenever reviewsByDish changes
+  useEffect(() => {
+    try {
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(reviewsByDish));
+    } catch (err) {
+      console.error('Failed to save reviews to localStorage:', err);
+    }
+  }, [reviewsByDish]);
 
   const handleMealClick = (slotInfo) => {
     setSelectedSlot(slotInfo);
