@@ -1,0 +1,256 @@
+:root {
+  --bg: #f4f6f8;
+  --card: #ffffff;
+  --ink: #17233a;
+  --mute: #5d6b82;
+  --line: #d5dce6;
+  --acc: #0b6e5f;
+  --accink: #ffffff;
+  --soft: #e3f1ee;
+  --err: #b3261e;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1624;
+    --card: #17213a;
+    --ink: #e8edf6;
+    --mute: #9aa8c2;
+    --line: #2b3957;
+    --acc: #4cc2ad;
+    --accink: #06231e;
+    --soft: #12332f;
+    --err: #ff8a80;
+    color-scheme: dark;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 16px/1.5 "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+h1 {
+  font-size: clamp(28px, 6vw, 40px);
+  line-height: 1.1;
+  margin: 8px 0 6px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.sub {
+  color: var(--mute);
+  margin: 0 0 20px;
+  max-width: 56ch;
+}
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 2px solid var(--line);
+  margin-bottom: 16px;
+  overflow-x: auto;
+}
+
+.tab {
+  background: none;
+  border: 0;
+  color: var(--mute);
+  font-family: inherit;
+  font-size: 1em;
+  font-weight: 600;
+  padding: 10px 16px;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  white-space: nowrap;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.tab[aria-selected="true"] {
+  color: var(--ink);
+  border-bottom-color: var(--acc);
+}
+
+.tab:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--acc);
+  outline-offset: 2px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 16px;
+}
+
+input,
+select {
+  font: inherit;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 9px 10px;
+  min-width: 0;
+  width: 100%;
+}
+
+.head,
+.row {
+  display: grid;
+  gap: 8px;
+  align-items: center;
+}
+
+.gpa .head,
+.gpa .row {
+  grid-template-columns: 1fr 84px 104px 36px;
+}
+
+.cg .head,
+.cg .row {
+  grid-template-columns: 1fr 96px 96px 36px;
+}
+
+.head {
+  font-size: 0.85em;
+  color: var(--mute);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.row {
+  margin-bottom: 8px;
+}
+
+.x {
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--mute);
+  border-radius: 6px;
+  height: 38px;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.x:hover {
+  color: var(--err);
+  border-color: var(--err);
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  font-family: inherit;
+  font-size: 0.95em;
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 10px 16px;
+  cursor: pointer;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  transition: opacity 0.15s ease, background-color 0.15s ease;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+.btn.p {
+  background: var(--acc);
+  color: var(--accink);
+  border-color: var(--acc);
+}
+
+.res {
+  margin-top: 16px;
+  background: var(--soft);
+  border-radius: 10px;
+  padding: 16px 18px;
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+.big {
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.res small {
+  display: block;
+  color: var(--mute);
+  font-size: 0.85em;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.msg {
+  color: var(--err);
+  font-size: 0.9em;
+  margin: 10px 0 0;
+  min-height: 1em;
+}
+
+.note {
+  color: var(--mute);
+  font-size: 0.85em;
+  margin: 14px 0 0;
+}
+
+@media (max-width: 520px) {
+  .gpa .head,
+  .gpa .row {
+    grid-template-columns: 1fr 64px 84px 34px;
+  }
+  .cg .head,
+  .cg .row {
+    grid-template-columns: 1fr 78px 78px 34px;
+  }
+}
