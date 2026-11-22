@@ -13,20 +13,26 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname, "public")));
+// Serve static frontend files – Vite builds to "dist"
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "dist")));
+  // Fallback to built index.html for SPA routes
+  app.get("*", (req, res) =>
+    res.sendFile(path.join(__dirname, "dist", "index.html"))
+  );
+} else {
+  // Development – serve public folder (fallback for static assets)
+  app.use(express.static(path.join(__dirname, "public")));
+}
 
 // Serve uploaded item images
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use("/api/items", itemRoutes);
 
-app.get("/api/health", (req, res) => {
-  res.json({ ok: true, message: "VITBeasy API is running" });
-});
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
-});
+app.get("/api/health", (req, res) =>
+  res.json({ ok: true, message: "VITBeasy API is running" })
+);
 
 mongoose
   .connect(process.env.MONGODB_URI)
