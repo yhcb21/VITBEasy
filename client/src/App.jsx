@@ -3,55 +3,28 @@ import menuData from './menu.json';
 import MessMenuTable from './components/MessMenuTable';
 import ReviewDrawer from './components/ReviewDrawer';
 
-// Storage key constant
-const LOCAL_STORAGE_KEY = 'mess_menu_reviews_by_dish';
-
-// Initial default seed reviews (used only if localStorage is completely empty)
-const DEFAULT_REVIEWS = {
-  'Roti (Plain & Butter)': [
-    {
-      userName: 'Aman',
-      rating: 4,
-      comment: 'Fresh and soft today.',
-      date: '2026-11-18',
-      mealContext: 'Monday Lunch'
-    }
-  ],
-  'Sambar': [
-    {
-      userName: 'Sneha',
-      rating: 5,
-      comment: 'Authentic taste and good vegetables.',
-      date: '2026-11-19',
-      mealContext: 'Monday Breakfast'
-    }
-  ]
-};
+const API_BASE = 'http://localhost:5000/api';
 
 function App() {
   const [selectedSlot, setSelectedSlot] = useState(null);
 
-  // 1. Lazy initialization: Load from localStorage on first render
-  const [reviewsByDish, setReviewsByDish] = useState(() => {
-    try {
-      const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
-      if (saved) {
-        return JSON.parse(saved);
-      }
-    } catch (err) {
-      console.error('Failed to load reviews from localStorage:', err);
-    }
-    return DEFAULT_REVIEWS;
-  });
+  // Reviews stored as: { [dishName]: [ ...reviewObjects ] }
+  const [reviewsByDish, setReviewsByDish] = useState({});
 
-  // 2. Persist to localStorage whenever reviewsByDish changes
+  // Load ALL reviews from MongoDB on first render, then group by dish name
   useEffect(() => {
-    try {
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(reviewsByDish));
-    } catch (err) {
-      console.error('Failed to save reviews to localStorage:', err);
-    }
-  }, [reviewsByDish]);
+    fetch(`${API_BASE}/reviews`)
+      .then((res) => res.json())
+      .then((data) => {
+        const grouped = {};
+        data.forEach((rev) => {
+          if (!grouped[rev.dishName]) grouped[rev.dishName] = [];
+          grouped[rev.dishName].push(rev);
+        });
+        setReviewsByDish(grouped);
+      })
+      .catch((err) => console.error('Could not fetch reviews:', err));
+  }, []);
 
   const handleMealClick = (slotInfo) => {
     setSelectedSlot(slotInfo);
@@ -61,15 +34,22 @@ function App() {
     setSelectedSlot(null);
   };
 
-  // Called when a review is submitted in ReviewDrawer
-  const handleAddDishReview = ({ dishName, review }) => {
-    setReviewsByDish((prev) => {
-      const existingReviews = prev[dishName] || [];
-      return {
+  // POST new review to MongoDB, then update local state with the saved document
+  const handleAddDishReview = async ({ dishName, review }) => {
+    try {
+      const res = await fetch(`${API_BASE}/reviews`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ dishName, ...review })
+      });
+      const saved = await res.json();
+      setReviewsByDish((prev) => ({
         ...prev,
-        [dishName]: [review, ...existingReviews]
-      };
-    });
+        [dishName]: [saved, ...(prev[dishName] || [])]
+      }));
+    } catch (err) {
+      console.error('Failed to save review:', err);
+    }
   };
 
   return (
@@ -82,9 +62,9 @@ function App() {
       </header>
 
       {/* The full-width mess menu table */}
-      <MessMenuTable 
-        menuData={menuData} 
-        onMealClick={handleMealClick} 
+      <MessMenuTable
+        menuData={menuData}
+        onMealClick={handleMealClick}
       />
 
       {/* Right-side floating Drawer */}
