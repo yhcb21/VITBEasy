@@ -1,13 +1,12 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
-import { Home, Grid, Package, Clock, User } from 'lucide-react';
+import { Home, Package, Clock, User } from 'lucide-react';
 
 export const Navigation = () => {
   const { activeTab, navigateTo } = useApp();
 
   const navItems = [
     { id: 'home', label: 'Home', icon: Home },
-    { id: 'services', label: 'Services', icon: Grid },
     { id: 'parcel_bringer', label: 'Parcel', icon: Package, highlight: true },
     { id: 'activity', label: 'Activity', icon: Clock },
     { id: 'profile', label: 'Profile', icon: User },

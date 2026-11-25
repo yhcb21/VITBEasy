@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
-import { Bell, CheckCircle2, Package, Sparkles, User, ChevronRight } from 'lucide-react';
+import { Bell, CheckCircle2, Package, Sparkles, User, ChevronRight, ShieldCheck } from 'lucide-react';
 
 export const Header = () => {
   const { activeTab, navigateTo, notifications, unreadNotifCount, currentUser } = useApp();
@@ -41,17 +41,6 @@ export const Header = () => {
             }`}
           >
             Home
-          </button>
-          
-          <button
-            onClick={() => navigateTo('services')}
-            className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all ${
-              activeTab === 'services'
-                ? 'bg-[#171717] text-white shadow-sm'
-                : 'text-[#171717]/70 hover:text-[#171717] hover:bg-[#D8D1C3]/40'
-            }`}
-          >
-            Services
           </button>
 
           <button
@@ -138,17 +127,27 @@ export const Header = () => {
             )}
           </div>
 
-          {/* User Profile Quick Tag */}
+          {/* Active Student Profile Badge (No swap button here) */}
           <button
             onClick={() => navigateTo('profile')}
+            title="View profile & switch test user in Profile tab"
             className="flex items-center gap-2 pl-1.5 pr-3 py-1 rounded-full border border-[#D8D1C3] bg-[#FAF8F5] hover:bg-[#D8D1C3]/30 transition-colors"
           >
-            <div className="w-6 h-6 rounded-full bg-[#D94A2B] text-white font-bold text-[10px] flex items-center justify-center">
-              {currentUser.initials}
+            <div
+              className="w-7 h-7 rounded-full text-white font-bold text-xs flex items-center justify-center shrink-0 shadow-xs"
+              style={{ backgroundColor: currentUser?.avatarBg || '#D94A2B' }}
+            >
+              {currentUser?.initials || 'U1'}
             </div>
-            <span className="text-xs font-semibold text-[#171717] hidden sm:inline-block">
-              {currentUser.name}
-            </span>
+            <div className="text-left hidden sm:block">
+              <div className="text-xs font-bold text-[#171717] flex items-center gap-1">
+                <span>{currentUser?.name || 'test_user_1'}</span>
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+              </div>
+              <span className="text-[10px] text-[#697052] block -mt-0.5">
+                Verified Student
+              </span>
+            </div>
           </button>
         </div>
 

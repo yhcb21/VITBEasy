@@ -1,6 +1,6 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
-import { Package, ArrowRight, Clock, ShieldCheck, Sparkles, Car, Printer, ShoppingBag, UtensilsCrossed, CheckCircle2 } from 'lucide-react';
+import { Package, ArrowRight, Clock, ShieldCheck, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export const HomeView = () => {
@@ -67,138 +67,65 @@ export const HomeView = () => {
         </div>
       </section>
 
-      {/* Dynamic Service Launcher Header */}
+      {/* Parcel Bringer Service Block */}
       <div>
-        <div className="flex items-baseline justify-between mb-4">
-          <div>
-            <span className="text-xs font-bold text-[#697052] tracking-wider uppercase">
-              CAMPUS UTILITIES
-            </span>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#171717]">
-              What do you need today?
-            </h2>
-          </div>
-          
-          <button
-            onClick={() => navigateTo('services')}
-            className="text-xs font-bold text-[#D94A2B] hover:underline flex items-center gap-1"
-          >
-            <span>View all services</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </button>
+        <div className="mb-4">
+          <span className="text-xs font-bold text-[#697052] tracking-wider uppercase">
+            CAMPUS UTILITY
+          </span>
+          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#171717]">
+            What do you need today?
+          </h2>
         </div>
 
-        {/* Dynamic Services Area: Featured Parcel Bringer Card + Secondary Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        {/* Full-width Parcel Bringer Feature Card */}
+        <div className="bg-[#FAF8F5] border-2 border-[#D94A2B] rounded-3xl p-6 sm:p-8 relative shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
           
-          {/* FEATURED SERVICE: PARCEL BRINGER (Spans 7 cols) */}
-          <div className="lg:col-span-7 bg-[#FAF8F5] border-2 border-[#D94A2B] rounded-3xl p-6 sm:p-8 relative shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
-            
-            <div className="absolute top-4 right-4 bg-[#D94A2B] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-xs">
-              ACTIVE FEATURE
-            </div>
+          <div className="absolute top-4 right-4 bg-[#D94A2B] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-xs">
+            LIVE
+          </div>
 
-            <div>
+          <div className="flex flex-col sm:flex-row sm:items-start gap-6">
+            <div className="flex-1">
               <div className="w-12 h-12 rounded-2xl bg-[#D94A2B]/10 text-[#D94A2B] flex items-center justify-center mb-4 border border-[#D94A2B]/20">
                 <Package className="w-6 h-6" />
               </div>
 
               <span className="text-xs font-bold uppercase tracking-wider text-[#697052]">
-                PARCEL BRINGER SERVICE
+                PARCEL BRINGER
               </span>
               <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#171717] mt-1 leading-snug">
                 Peer-to-peer parcel collection.
               </h3>
-              <p className="text-sm text-[#171717]/75 mt-2 leading-relaxed">
-                Need your Amazon, Flipkart or Meesho parcel brought to your hostel? Raise a request with up to ₹20 tip. Any verified student heading back will pick it up for you!
+              <p className="text-sm text-[#171717]/75 mt-2 leading-relaxed max-w-2xl">
+                Need your Amazon, Flipkart or Meesho parcel brought to your hostel? Raise a request with a tip. Any verified student heading back will pick it up for you.
               </p>
 
-              {/* Status pill */}
               <div className="mt-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#F5F1E8] border border-[#D8D1C3] text-xs font-medium text-[#171717]">
-                <span className="w-2 h-2 rounded-full bg-[#D94A2B]"></span>
-                <span><strong>{pendingRequestsCount} active requests</strong> in campus pool</span>
+                <span className="w-2 h-2 rounded-full bg-[#D94A2B] animate-pulse"></span>
+                <span><strong>{pendingRequestsCount} active requests</strong> in campus pool right now</span>
               </div>
-            </div>
-
-            {/* Dominant Service Actions */}
-            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 pt-6 border-t border-[#D8D1C3]">
-              <button
-                onClick={() => navigateTo('parcel_bringer', 'requester')}
-                className="py-3.5 px-4 bg-[#D94A2B] hover:bg-[#C23E20] text-white font-bold text-sm rounded-2xl shadow-sm transition-transform active:scale-98 flex items-center justify-center gap-2"
-              >
-                <span>Request a Parcel</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-
-              <button
-                onClick={() => navigateTo('parcel_bringer', 'bringer')}
-                className="py-3.5 px-4 bg-[#F5F1E8] hover:bg-[#EBE5DA] text-[#171717] border border-[#D8D1C3] font-bold text-sm rounded-2xl transition-colors flex items-center justify-center gap-2"
-              >
-                <span>Accept & Pick Up</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
             </div>
           </div>
 
-          {/* SECONDARY SERVICES (Spans 5 cols) - Note: Lost & Found removed as requested */}
-          <div className="lg:col-span-5 space-y-4 flex flex-col justify-between">
-            
-            {/* Secondary Service 1: Ride Share */}
-            <div className="bg-[#FAF8F5] border border-[#D8D1C3] rounded-2xl p-4 sm:p-5 flex items-start gap-4 hover:border-[#697052] transition-colors">
-              <div className="w-10 h-10 rounded-xl bg-[#171717]/10 text-[#171717] flex items-center justify-center shrink-0 border border-[#171717]/20">
-                <Car className="w-5 h-5" />
-              </div>
-              <div className="flex-1">
-                <div className="flex items-center justify-between">
-                  <h4 className="font-bold text-base text-[#171717]">Find a ride</h4>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#697052] bg-[#F3F4EE] px-2 py-0.5 rounded">
-                    Coming Soon
-                  </span>
-                </div>
-                <p className="text-xs text-[#171717]/70 mt-1">
-                  Share auto-rickshaw or cab fare from campus gate to railway station or town.
-                </p>
-              </div>
-            </div>
+          {/* Actions */}
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 pt-6 border-t border-[#D8D1C3]">
+            <button
+              onClick={() => navigateTo('parcel_bringer', 'requester')}
+              className="py-3.5 px-4 bg-[#D94A2B] hover:bg-[#C23E20] text-white font-bold text-sm rounded-2xl shadow-sm transition-transform active:scale-98 flex items-center justify-center gap-2"
+            >
+              <span>Request a Parcel</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
 
-            {/* Secondary Service 2: Print & Xerox */}
-            <div className="bg-[#FAF8F5] border border-[#D8D1C3] rounded-2xl p-4 sm:p-5 flex items-start gap-4 hover:border-[#697052] transition-colors">
-              <div className="w-10 h-10 rounded-xl bg-[#697052]/10 text-[#697052] flex items-center justify-center shrink-0 border border-[#697052]/20">
-                <Printer className="w-5 h-5" />
-              </div>
-              <div className="flex-1">
-                <div className="flex items-center justify-between">
-                  <h4 className="font-bold text-base text-[#171717]">Print something</h4>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#697052] bg-[#F3F4EE] px-2 py-0.5 rounded">
-                    Coming Soon
-                  </span>
-                </div>
-                <p className="text-xs text-[#171717]/70 mt-1">
-                  Send lab report PDFs to campus print shop before you arrive to skip the queue.
-                </p>
-              </div>
-            </div>
-
-            {/* Secondary Service 3: Campus Marketplace */}
-            <div className="bg-[#FAF8F5] border border-[#D8D1C3] rounded-2xl p-4 sm:p-5 flex items-start gap-4 hover:border-[#697052] transition-colors">
-              <div className="w-10 h-10 rounded-xl bg-[#D94A2B]/10 text-[#D94A2B] flex items-center justify-center shrink-0 border border-[#D94A2B]/20">
-                <ShoppingBag className="w-5 h-5" />
-              </div>
-              <div className="flex-1">
-                <div className="flex items-center justify-between">
-                  <h4 className="font-bold text-base text-[#171717]">Buy & sell on campus</h4>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#697052] bg-[#F3F4EE] px-2 py-0.5 rounded">
-                    Coming Soon
-                  </span>
-                </div>
-                <p className="text-xs text-[#171717]/70 mt-1">
-                  Buy & sell lab coats, mattresses, study material & tech items within campus.
-                </p>
-              </div>
-            </div>
-
+            <button
+              onClick={() => navigateTo('parcel_bringer', 'bringer')}
+              className="py-3.5 px-4 bg-[#F5F1E8] hover:bg-[#EBE5DA] text-[#171717] border border-[#D8D1C3] font-bold text-sm rounded-2xl transition-colors flex items-center justify-center gap-2"
+            >
+              <span>Accept & Pick Up</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
           </div>
-
         </div>
       </div>
 
@@ -224,7 +151,7 @@ export const HomeView = () => {
             onClick={() => navigateTo('parcel_bringer', 'tracking')}
             className="px-4 py-2 bg-[#D94A2B] text-white text-xs font-bold rounded-xl hover:bg-[#C23E20] transition-colors shrink-0"
           >
-            Track Delivery & PIN →
+            Track Delivery →
           </button>
         </section>
       )}
@@ -238,7 +165,7 @@ export const HomeView = () => {
           <div>
             <h3 className="font-serif text-xl font-bold text-[#171717]">Student-to-student peer network</h3>
             <p className="text-xs text-[#171717]/70 mt-0.5 max-w-lg">
-              Verified campus students collect parcels on your behalf. A simple 4-digit Delivery PIN given at hostel door guarantees instant tip settlement.
+              Verified campus students collect parcels on your behalf with safe peer-to-peer delivery right to your hostel block.
             </p>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, CheckCircle2, Star, MessageSquare, ArrowRight, ShieldCheck, MapPin, Send } from 'lucide-react';
+import { X, CheckCircle2, Star, ArrowRight, ShieldCheck, MapPin } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export const RequestDetailModal = ({ request, onClose, onAccept }) => {
@@ -147,7 +147,7 @@ export const RequestDetailModal = ({ request, onClose, onAccept }) => {
               onClick={() => onAccept(id)}
               className="w-full py-4 bg-[#D94A2B] hover:bg-[#C23E20] text-white font-bold text-sm rounded-2xl shadow-md transition-transform active:scale-98 flex items-center justify-center gap-2"
             >
-              <span>Accept Request & Open Live Chat</span>
+              <span>Accept Request to Deliver</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>

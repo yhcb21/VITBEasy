@@ -1,0 +1,102 @@
+{
+  "users": [
+    {
+      "id": "test_user_1",
+      "name": "test_user_1",
+      "fullTitle": "test_user_1",
+      "department": "Computer Science & Engg",
+      "isVerified": true,
+      "rating": 4.9,
+      "parcelsBrought": 7,
+      "parcelsReceived": 12,
+      "defaultHostel": "BH1 (Boys Hostel 1)",
+      "avatarBg": "#D94A2B",
+      "initials": "U1",
+      "role": "requester"
+    },
+    {
+      "id": "test_user_2",
+      "name": "test_user_2",
+      "fullTitle": "test_user_2",
+      "department": "Computer Science & Engg",
+      "isVerified": true,
+      "rating": 4.9,
+      "parcelsBrought": 15,
+      "parcelsReceived": 3,
+      "defaultHostel": "BH3 (Boys Hostel 3)",
+      "avatarBg": "#697052",
+      "initials": "U2",
+      "role": "bringer"
+    },
+    {
+      "id": "test_user_3",
+      "name": "test_user_3",
+      "fullTitle": "test_user_3",
+      "department": "Electronics & Comm",
+      "isVerified": true,
+      "rating": 4.8,
+      "parcelsBrought": 4,
+      "parcelsReceived": 9,
+      "defaultHostel": "GH1 (Girls Hostel 1)",
+      "avatarBg": "#171717",
+      "initials": "U3",
+      "role": "requester"
+    }
+  ],
+  "requests": [
+    {
+      "id": "req_101",
+      "requesterId": "test_user_1",
+      "platform": "Amazon",
+      "platformColor": "#FF9900",
+      "pickupLocation": "Delivery Spot",
+      "dropLocation": "BH1 (Boys Hostel 1)",
+      "size": "Small package",
+      "urgency": "Before 5:30 PM",
+      "paymentType": "Prepaid",
+      "codAmount": 0,
+      "reward": 20,
+      "notes": "Room 412. Small Amazon box with study books.",
+      "requester": {
+        "id": "test_user_1",
+        "name": "test_user_1",
+        "isVerified": true,
+        "rating": 4.9,
+        "completedCount": 7,
+        "avatarBg": "#D94A2B",
+        "initials": "U1"
+      },
+      "timeAgo": "02 MIN AGO",
+      "createdAt": "2026-11-24T18:00:00.000Z",
+      "status": "REQUESTED",
+      "bringer": null
+    },
+    {
+      "id": "req_102",
+      "requesterId": "test_user_3",
+      "platform": "Flipkart",
+      "platformColor": "#2874F0",
+      "pickupLocation": "Delivery Spot",
+      "dropLocation": "BH3 (Boys Hostel 3)",
+      "size": "Medium box",
+      "urgency": "As soon as possible",
+      "paymentType": "COD",
+      "codAmount": 240,
+      "reward": 15,
+      "notes": "COD parcel: Please pay ₹240 at Delivery Spot. I will give you ₹240 + ₹15 tip in cash.",
+      "requester": {
+        "id": "test_user_3",
+        "name": "test_user_3",
+        "isVerified": true,
+        "rating": 4.8,
+        "completedCount": 12,
+        "avatarBg": "#171717",
+        "initials": "U3"
+      },
+      "timeAgo": "08 MIN AGO",
+      "createdAt": "2026-11-24T17:55:00.000Z",
+      "status": "REQUESTED",
+      "bringer": null
+    }
+  ]
+}

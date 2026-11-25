@@ -3,11 +3,10 @@ import { AppProvider, useApp } from './context/AppContext';
 import { Header } from './components/common/Header';
 import { Navigation } from './components/common/Navigation';
 import { HomeView } from './components/home/HomeView';
-import { ServiceDirectory } from './components/services/ServiceDirectory';
 import { ParcelServiceContainer } from './components/parcel/ParcelServiceContainer';
 import { ActivityTimeline } from './components/activity/ActivityTimeline';
 import { ProfileView } from './components/profile/ProfileView';
-import { CheckCircle2, AlertCircle, Info, Sparkles } from 'lucide-react';
+import { CheckCircle2, AlertCircle, Info } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const MainContent = () => {
@@ -44,7 +43,6 @@ const MainContent = () => {
         {/* Main View Container */}
         <main className="max-w-6xl mx-auto px-4 sm:px-6 pt-6 pb-24 md:pb-12">
           {activeTab === 'home' && <HomeView />}
-          {activeTab === 'services' && <ServiceDirectory />}
           {activeTab === 'parcel_bringer' && <ParcelServiceContainer />}
           {activeTab === 'activity' && <ActivityTimeline />}
           {activeTab === 'profile' && <ProfileView />}
